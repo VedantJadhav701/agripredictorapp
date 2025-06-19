@@ -36,3 +36,4 @@ def show():
        st.warning("🚧 This feature is currently under development and may not work properly in the cloud environment.")
        st.info("We're working to support Agmarknet data fetching without relying on Selenium. Please try again later.")
        return
+ 
