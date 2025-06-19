@@ -32,14 +32,7 @@ def show():
     with col3:
         market = st.text_input("Enter Market", value="Pune")
 
-    if st.button("📈 Fetch Prices"):
-        with st.spinner("Trying to fetch without Selenium..."):
-            result = fetch_agmarknet_data_without_selenium(state, commodity, market)
-            if isinstance(result, str):
-                st.error(f"❌ Error: {result}")
-            elif result:
-                df = pd.DataFrame(result)
-                st.success(f"✅ {len(df)} records fetched.")
-                st.dataframe(df)
-            else:
-                st.warning("⚠️ No data returned or not supported without Selenium.")
+    if st.button("📈 Fetch Crop Prices"):
+       st.warning("🚧 This feature is currently under development and may not work properly in the cloud environment.")
+       st.info("We're working to support Agmarknet data fetching without relying on Selenium. Please try again later.")
+       return
