@@ -1,10 +1,8 @@
-# app.py
 import streamlit as st
 import pandas as pd
 import os
 import pages.planting as planting
 print(dir(planting))  # This will list all functions and variables in the file
-
 
 # Set wide layout for Streamlit
 st.set_page_config(page_title="AgriPredictor", layout="wide")
@@ -15,6 +13,7 @@ if "logged_in" not in st.session_state:
 
 if "user_info" not in st.session_state:
     st.session_state.user_info = {}
+
 
 
 
