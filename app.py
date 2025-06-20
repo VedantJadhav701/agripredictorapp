@@ -37,15 +37,16 @@ state_districts = {
 }
 
 
+# ------------------ LOGIN SCREEN ------------------ #
 if not st.session_state.logged_in:
     st.title("👨‍🌾 AgriPredictor - Farmer Login")
 
-    # ------------------ Store state selection dynamically ------------------ #
     if "selected_state" not in st.session_state:
         st.session_state.selected_state = list(state_districts.keys())[0]
 
     st.session_state.selected_state = st.selectbox(
-        "State", list(state_districts.keys()), index=list(state_districts.keys()).index(st.session_state.selected_state)
+        "State", list(state_districts.keys()),
+        index=list(state_districts.keys()).index(st.session_state.selected_state)
     )
 
     selected_state = st.session_state.selected_state
@@ -80,7 +81,7 @@ if not st.session_state.logged_in:
 # ------------------ LOGGED IN UI ------------------ #
 user = st.session_state.user_info
 
-# Sidebar: Logout + Profile
+# Show Sidebar only after login
 with st.sidebar:
     if st.button("🚪 Logout"):
         st.session_state.logged_in = False
@@ -95,22 +96,21 @@ with st.sidebar:
         st.markdown(f"**🌐 Nationality:** {user['nationality']}")
         st.markdown(f"**📍 Location:** {user['district']}, {user['state']}")
 
+    selected_section = st.radio(
+        "📂 Navigation",
+        [
+            "🏠 Dashboard",
+            "🧪 Fertilizer Recommendation",
+            "🌾 Crop Recommendation",
+            "📈 Commodity Price Forecast",
+            "📅 Crop Season & Income Guide",
+            "🌿 General Planting Procedures",
+            "📊 Agmarknet Prices"
+        ]
+    )
+
 # Main Greeting
 st.success(f"✅ Welcome {user['name']} from {user['district']}, {user['state']}!")
-
-# ------------------ SECTION ROUTING ------------------ #
-selected_section = st.sidebar.radio(
-    "📂 Navigation",
-    [
-        "🏠 Dashboard",
-        "🧪 Fertilizer Recommendation",
-        "🌾 Crop Recommendation",
-        "📈 Commodity Price Forecast",
-        "📅 Crop Season & Income Guide",
-        "🌿 General Planting Procedures",
-        "📊 Agmarknet Prices"
-    ]
-)
 
 # ------------------ LOAD PAGE MODULES ------------------ #
 if selected_section == "🏠 Dashboard":
