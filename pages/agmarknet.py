@@ -24,6 +24,10 @@ def show():
 
     st.markdown("Fetch recent commodity prices (without Selenium).")
 
+    # Show fallback warning message immediately on page load
+    st.warning("🚧 This feature is currently under development and may not work properly in the cloud environment.")
+    st.info("We're working to support Agmarknet data fetching without relying on Selenium. Please try again later.")
+
     col1, col2, col3 = st.columns(3)
     with col1:
         state = st.text_input("Enter State", value="Maharashtra")
@@ -32,8 +36,7 @@ def show():
     with col3:
         market = st.text_input("Enter Market", value="Pune")
 
-    if st.button("📈 Fetch Crop Prices"):
-       st.warning("🚧 This feature is currently under development and may not work properly in the cloud environment.")
-       st.info("We're working to support Agmarknet data fetching without relying on Selenium. Please try again later.")
-       return
+    # Still display the button (optional)
+    st.button("📈 Fetch Crop Prices", disabled=True)
+
  
