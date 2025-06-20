@@ -39,13 +39,23 @@ state_districts = {
 
 if not st.session_state.logged_in:
     st.title("👨‍🌾 AgriPredictor - Farmer Login")
+
+    # ------------------ Store state selection dynamically ------------------ #
+    if "selected_state" not in st.session_state:
+        st.session_state.selected_state = list(state_districts.keys())[0]
+
+    st.session_state.selected_state = st.selectbox(
+        "State", list(state_districts.keys()), index=list(state_districts.keys()).index(st.session_state.selected_state)
+    )
+
+    selected_state = st.session_state.selected_state
+    selected_district = st.selectbox("District", state_districts[selected_state])
+
     with st.form("login_form"):
         name = st.text_input("Full Name")
         email = st.text_input("Email")
         phone = st.text_input("Phone Number")
         nationality = st.selectbox("Nationality", ["Indian", "Other"])
-        selected_state = st.selectbox("State", list(state_districts.keys()))
-        selected_district = st.selectbox("District", state_districts[selected_state])
         login_btn = st.form_submit_button("Login")
 
     if login_btn:
@@ -63,7 +73,9 @@ if not st.session_state.logged_in:
             st.rerun()
         else:
             st.warning("⚠️ Please fill in all fields to log in.")
+
     st.stop()
+
 
 # ------------------ LOGGED IN UI ------------------ #
 user = st.session_state.user_info
